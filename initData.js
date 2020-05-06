@@ -29,10 +29,12 @@ function getFile(filepath){
 			if (req.readyState === 4 && req.status === 200) {
 				resolve(req.responseText);
 			}else{
+				alert(req.statusText);
 				reject(new Error(req.statusText));
 			}
 		};
 		req.onerror = () => {
+			alert(req.statusText);
 			reject(new Error(req.statusText));
 		};
 		req.send(null);
