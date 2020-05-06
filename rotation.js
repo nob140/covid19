@@ -1,5 +1,4 @@
 //Rotate the earth
-//https://qiita.com/code_monkey/items/e1a3f6c48cbda3fa0e72
 var eventHelper = new Cesium.EventHelper();
 var removeCallback;
 var rot_flag = false;
