@@ -34,11 +34,15 @@ viewer.scene.globe.depthTestAgainstTerrain = true;	//absolute height
 viewer.scene.globe.enableLightning = true;
 
 async function init() {
+	//2020-05-06 Data download doesn't work when ussing GitHub Pages
 	var today = new Date();
 	var todaystr = "YEAR-MONTH-DAY".replace("YEAR", today.getFullYear())
 		.replace("MONTH", (today.getMonth()+1 < 10 ? "0" + Number(today.getMonth()+1) : today.getMonth()+1))
 		.replace("DAY", (today.getDate() < 10 ? "0" + today.getDate() : today.getDate()));
 	var filename = "covid19_" + todaystr + ".csv";
+	
+	//2020-05-06 Using local file tentatively
+	filename = "covid19_2020-05-06.csv";
 	var filepath = "./data/" + filename;
 
 	//Read data
