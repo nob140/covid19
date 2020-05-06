@@ -27,6 +27,7 @@ function getFile(filepath){
 		req.open("GET", filepath, true);
 		req.onload = () => {
 			if (req.readyState === 4 && req.status === 200) {
+				alert("success req.onload");
 				resolve(req.responseText);
 			}else{
 				alert(req.statusText);
