@@ -30,12 +30,12 @@ function getFile(filepath){
 				alert("success req.onload");
 				resolve(req.responseText);
 			}else{
-				alert("error 1");
+				alert("error 1: " + filepath);
 				reject(new Error(req.statusText));
 			}
 		};
 		req.onerror = () => {
-			alert("error 2");
+			alert("error 2: " + filepath);
 			reject(new Error(req.statusText));
 		};
 		req.send(null);
