@@ -1,0 +1,4 @@
+# covid19
+Visualization of COVID-19 data provided by ECDC
+
+2020-05-06 Test for using CesiumJS and GitHub Pages
