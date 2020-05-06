@@ -52,7 +52,7 @@ async function init() {
 		covdata = await getFile(filepath);
 		covdata = convertCSVtoArray(covdata);
 	}catch(e){
-		covdata = await getFile("https://opendata.ecdc.europa.eu/covid19/casedistribution/csv");
+		covdata = await getFile("https://opendata.ecdc.europa.eu/covid19/casedistribution/csv/");
 
 		//download -> downloaded file should be moved to ./data folder manually...
 		var blob = new Blob([covdata], {type: "text/plain"});
