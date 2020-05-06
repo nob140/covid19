@@ -27,15 +27,15 @@ function getFile(filepath){
 		req.open("GET", filepath, true);
 		req.onload = () => {
 			if (req.readyState === 4 && req.status === 200) {
-				alert("success req.onload");
+				alert('success req.onload');
 				resolve(req.responseText);
 			}else{
-				alert("error 1: " + filepath);
+				alert('error 1: ' + filepath);
 				reject(new Error(req.statusText));
 			}
 		};
 		req.onerror = () => {
-			alert("error 2: " + filepath);
+			alert('error 2: ' + filepath);
 			reject(new Error(req.statusText));
 		};
 		req.send(null);
