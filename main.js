@@ -1,6 +1,6 @@
 "use strict";
 
-Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIwYjY0ODU3MS0yMjQxLTRiMmMtOWM2OC0xMTA2ZjIwMDdkOTkiLCJpZCI6MTM2MTMsInNjb3BlcyI6WyJhc3IiLCJnYyJdLCJpYXQiOjE1NjM2Njk2MjV9.NS_r4XkSWyZjzZj8QnvEOyNsYj12hlEgb6Tat8TApLI';
+//Cesium.Ion.defaultAccessToken = '';
 
 var clock = new Cesium.Clock({
 	startTime : Cesium.JulianDate.fromDate(new Date(2019, 12, 31)),
@@ -31,7 +31,6 @@ var viewer = new Cesium.Viewer("cesium", {
 	selectionIndicator: false,
 });
 viewer.scene.globe.depthTestAgainstTerrain = true;	//absolute height
-//viewer.scene.globe.depthTestAgainstTerrain = false;	//related height, above terrain (not correct with createWorldTerrain())
 viewer.scene.globe.enableLightning = true;
 
 async function init() {
@@ -41,9 +40,6 @@ async function init() {
 		.replace("DAY", (today.getDate() < 10 ? "0" + today.getDate() : today.getDate()));
 	var filename = "covid19_" + todaystr + ".csv";
 	var filepath = "./data/" + filename;
-	//var filepath = "/Nobu/vscode/cesium-project/data/" + filename;
-	//var filepath = "\\Nobu\\vscode\\cesium-project\\data\\" + filename;
-	//var filepath = ${workspaceFolder} + "./data/" + filename;
 
 	//Read data
 	var covdata;
@@ -58,7 +54,6 @@ async function init() {
 		var blob = new Blob([covdata], {type: "text/plain"});
 		const a = document.createElement('a');
 		a.setAttribute('download', filename);
-		//a.setAttribute('download', filepath);
 		a.setAttribute('href', window.URL.createObjectURL(blob));
 		a.click(); // EXECUTING CLICK EVENT WILL AUTO-DOWNLOAD THE FILE
 
@@ -73,13 +68,11 @@ async function init() {
 
 	//CZML
 	var dataSource = new Cesium.CzmlDataSource();
-	//dataSource.load(makeTestData());
 	var czmlList = makeCZMLAndStatsForListOfCountries(covdata, countries);
 	dataSource.load(czmlList);
 	viewer.dataSources.add(dataSource);
 
 	//Adjust clock
-	//clock.interval = czmlList[0].clock.interval;
 	clock.startTime = czmlList[0].clock.startTime;
 	clock.stopTime = czmlList[0].clock.stopTime;
 	clock.currentTime = czmlList[0].clock.currentTime;
