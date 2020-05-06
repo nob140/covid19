@@ -42,7 +42,8 @@ async function init() {
 	var filename = "covid19_" + todaystr + ".csv";
 	
 	//2020-05-06 Using local file tentatively
-	filename = "covid19_2020-05-06.csv";
+	//filename = "covid19_2020-05-06.csv";
+	
 	var filepath = "./data/" + filename;
 
 	//Read data
