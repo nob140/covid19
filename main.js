@@ -49,11 +49,11 @@ async function init() {
 	//Read data
 	var covdata;
 	try{
+		//local file
+		covdata = await getFile(filepath);
+		covdata = convertCSVtoArray(covdata);
+	}catch(e){
 		try{
-			//local file
-			covdata = await getFile(filepath);
-			covdata = convertCSVtoArray(covdata);
-		}catch(e){
 			//covdata = await getFile("https://opendata.ecdc.europa.eu/covid19/casedistribution/csv/");
 			covdata = await getFile("http://opendata.ecdc.europa.eu/covid19/casedistribution/csv/");
 
@@ -65,10 +65,10 @@ async function init() {
 			a.click(); // EXECUTING CLICK EVENT WILL AUTO-DOWNLOAD THE FILE
 
 			covdata = convertCSVtoArray(covdata);
+		}catch(e){
+			covdata = await getFile("./data/covid19_2020-05-06.csv");
+			covdata = convertCSVtoArray(covdata);		
 		}
-	}catch(e){
-		covdata = await getFile("./data/covid19_2020-05-06.csv");
-		covdata = convertCSVtoArray(covdata);		
 	}
 
 	//Country's location
@@ -103,7 +103,7 @@ async function init() {
 	));
 
 	//information
-	buildInfobar("Ver 114");
+	buildInfobar("Ver 115");
 }
 
 window.onload = init
