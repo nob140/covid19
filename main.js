@@ -48,10 +48,9 @@ async function init() {
 		covdata = await getFile(filepath);
 		covdata = convertCSVtoArray(covdata);
 	}catch(e){
-		//2020-05-06 Data download doesn't work when ussing GitHub Pages
 		try{
+			//remote file
 			covdata = await getFile("https://opendata.ecdc.europa.eu/covid19/casedistribution/csv/");
-			//covdata = await getFile("http://opendata.ecdc.europa.eu/covid19/casedistribution/csv/");
 
 			//download -> downloaded file should be moved to ./data folder manually...
 			var blob = new Blob([covdata], {type: "text/plain"});
@@ -62,6 +61,7 @@ async function init() {
 
 			covdata = convertCSVtoArray(covdata);
 		}catch(e){
+			//2020-05-08 Data download doesn't work when ussing GitHub Pages
 			covdata = await getFile("./data/covid19_2020-05-06.csv");
 			covdata = convertCSVtoArray(covdata);		
 		}
@@ -99,7 +99,7 @@ async function init() {
 	));
 
 	//information
-	buildInfobar("Ver 115");
+	buildInfobar("Ver 116");
 }
 
 window.onload = init
