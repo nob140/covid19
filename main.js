@@ -49,21 +49,26 @@ async function init() {
 	//Read data
 	var covdata;
 	try{
-		//local file
-		covdata = await getFile(filepath);
-		covdata = convertCSVtoArray(covdata);
+		try{
+			//local file
+			covdata = await getFile(filepath);
+			covdata = convertCSVtoArray(covdata);
+		}catch(e){
+			//covdata = await getFile("https://opendata.ecdc.europa.eu/covid19/casedistribution/csv/");
+			covdata = await getFile("http://opendata.ecdc.europa.eu/covid19/casedistribution/csv/");
+
+			//download -> downloaded file should be moved to ./data folder manually...
+			var blob = new Blob([covdata], {type: "text/plain"});
+			const a = document.createElement('a');
+			a.setAttribute('download', filename);
+			a.setAttribute('href', window.URL.createObjectURL(blob));
+			a.click(); // EXECUTING CLICK EVENT WILL AUTO-DOWNLOAD THE FILE
+
+			covdata = convertCSVtoArray(covdata);
+		}
 	}catch(e){
-		//covdata = await getFile("https://opendata.ecdc.europa.eu/covid19/casedistribution/csv/");
-		covdata = await getFile("http://opendata.ecdc.europa.eu/covid19/casedistribution/csv/");
-
-		//download -> downloaded file should be moved to ./data folder manually...
-		var blob = new Blob([covdata], {type: "text/plain"});
-		const a = document.createElement('a');
-		a.setAttribute('download', filename);
-		a.setAttribute('href', window.URL.createObjectURL(blob));
-		a.click(); // EXECUTING CLICK EVENT WILL AUTO-DOWNLOAD THE FILE
-
-		covdata = convertCSVtoArray(covdata);
+		covdata = await getFile("./data/covid19_2020-05-06.csv");
+		covdata = convertCSVtoArray(covdata);		
 	}
 
 	//Country's location
@@ -98,7 +103,7 @@ async function init() {
 	));
 
 	//information
-	buildInfobar("Ver 113");
+	buildInfobar("Ver 114");
 }
 
 window.onload = init
