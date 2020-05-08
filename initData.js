@@ -7,7 +7,7 @@ var colorTable = [
 ]
 
 function buildColorTableToolbar(){
-	var toolbar = document.getElementById('toolbar');
+	var toolbar = document.getElementById('colortable');
 	toolbar.innerHTML = '<table border="1">' +
 	'<tr>Confirmed case</tr>' +
 	'<tr><td class ="circle" style="background-color:' + Cesium.Color.fromBytes(colorTable[0][1][0], colorTable[0][1][1], colorTable[0][1][2], colorTable[0][1][3]).toCssColorString() + '">    </td>' + 
@@ -19,6 +19,11 @@ function buildColorTableToolbar(){
 	'<tr><td class ="circle" style="background-color:' + Cesium.Color.fromBytes(colorTable[3][1][0], colorTable[3][1][1], colorTable[3][1][2], colorTable[3][1][3]).toCssColorString() + '"></td>' +
 	'<td>' + colorTable[3][0] + ' - ' + (colorTable[2][0]-1) + '</td></tr>' +
 	'</table>';
+}
+
+function buildInfobar(infostr){
+	var toolbar = document.getElementById('infobar');
+	toolbar.innerHTML = '<p>' + infostr + '</p>';
 }
 
 function getFile(filepath){

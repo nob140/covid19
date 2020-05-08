@@ -95,6 +95,9 @@ async function init() {
 		'<a href="https://www.ecdc.europa.eu/en/publications-data/download-todays-data-geographic-distribution-covid-19-cases-worldwide">'
 		+ 'COVID-19 cases data courtesy of ECDC (European Centre for Disease Prevention and Control)</a>'
 	));
+
+	//information
+	buildInfobar("Ver 111");
 }
 
 window.onload = init
