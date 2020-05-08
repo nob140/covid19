@@ -2,7 +2,7 @@ body {
   margin: 0;
 }
 
-.cesium {
+#cesium {
   position: absolute;
   left: 0;
   top: 0;
@@ -10,7 +10,14 @@ body {
   bottom: 0;
 }
 
-#toolbar {
+#infobar {
+  position: absolute;
+  top: 200px;
+  left: 5px;
+  color: RGBA(255, 255, 255, 0.2);
+}
+
+#colortable {
   display: block;
   position: absolute;
   top: 50px;
