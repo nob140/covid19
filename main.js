@@ -34,6 +34,17 @@ viewer.scene.globe.depthTestAgainstTerrain = true;	//absolute height
 viewer.scene.globe.enableLightning = true;
 
 async function init() {
+	//information
+	buildInfobar("Ver 116");
+	
+	//Legend & Courtesy
+	buildColorTableToolbar();
+	viewer.scene.frameState.creditDisplay.addDefaultCredit(new Cesium.Credit(
+		'<a href="https://www.ecdc.europa.eu/en/publications-data/download-todays-data-geographic-distribution-covid-19-cases-worldwide">'
+		+ 'COVID-19 cases data courtesy of ECDC (European Centre for Disease Prevention and Control)</a>'
+	));
+
+	//Read data
 	var today = new Date();
 	var todaystr = "YEAR-MONTH-DAY".replace("YEAR", today.getFullYear())
 		.replace("MONTH", (today.getMonth()+1 < 10 ? "0" + Number(today.getMonth()+1) : today.getMonth()+1))
@@ -41,7 +52,6 @@ async function init() {
 	var filename = "covid19_" + todaystr + ".csv";
 	var filepath = "./data/" + filename;
 
-	//Read data
 	var covdata;
 	try{
 		//local file
@@ -90,16 +100,6 @@ async function init() {
 		var horizontalDegrees = Cesium.Math.toDegrees(viewRect.east - viewRect.west) - 140.0;
 		viewer.camera.rotateRight(Cesium.Math.toRadians(horizontalDegrees));
 	}
-
-	//Legend & Courtesy
-	buildColorTableToolbar();
-	viewer.scene.frameState.creditDisplay.addDefaultCredit(new Cesium.Credit(
-		'<a href="https://www.ecdc.europa.eu/en/publications-data/download-todays-data-geographic-distribution-covid-19-cases-worldwide">'
-		+ 'COVID-19 cases data courtesy of ECDC (European Centre for Disease Prevention and Control)</a>'
-	));
-
-	//information
-	buildInfobar("Ver 116");
 }
 
 window.onload = init
